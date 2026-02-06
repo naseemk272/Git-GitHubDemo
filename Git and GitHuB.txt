@@ -1,0 +1,16 @@
+Configuring Git
+git config --global user.name "My Name"
+git config --global user.email "someone@email.com"
+git config --list
+
+Clone & Status
+	Clone - Cloning a repository on our local machine
+		Git Command - git clone <link>
+	Status - display the state of the code
+		Git Command - git status
+
+cd command -> change directory
+
+ls command -> It is used for listing all the files in the Folder/Repository
+ls -a command -> It is same as ls but also display hidden files and Folder/Repository
+
