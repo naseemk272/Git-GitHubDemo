@@ -27,4 +27,14 @@ add -> add new or changed files in your working directory to Git staging area.
 
 Push Command
 push -> Upload local Repository/Folder content to remote(GitHub) repo
-	command -> git push origin main 
+	command -> git push origin main
+
+Init Command
+	init -> Used to create new git repo
+	Commands -> git init
+		    git remote add origin <Link>
+		    git remote -v (To Verify remote)
+		    git branch (To check branch)
+		    git branch -M main (To rename branch)
+		    git puch origin main
+                    git puch -u origin main (If your pushing in same branch frequently so user can directly use -> git push)
