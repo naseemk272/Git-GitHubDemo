@@ -5,12 +5,26 @@ git config --list
 
 Clone & Status
 	Clone - Cloning a repository on our local machine
-		Git Command - git clone <link>
+		Git Command -> git clone <link>
 	Status - display the state of the code
-		Git Command - git status
+		Git Command -> git status
+		1) Untracked -> new Files that git doesn't yet track
+		2) Modified -> changed
+		3) Staged -> File is ready to be committed
+		4) Unmodified -> unchanged
+	
 
 cd command -> change directory
 
 ls command -> It is used for listing all the files in the Folder/Repository
 ls -a command -> It is same as ls but also display hidden files and Folder/Repository
 
+Add & Commit
+add -> add new or changed files in your working directory to Git staging area.
+	command -> 1) git add <file name> 2) git add . (For all files) 
+	commit -> it is the record of change
+	command -> git commit -m "Some Message"
+
+Push Command
+push -> Upload local Repository/Folder content to remote(GitHub) repo
+	command -> git push origin main 
