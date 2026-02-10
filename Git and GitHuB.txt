@@ -1,64 +1,357 @@
-Configuring Git
+==================================================
+GIT BASICS – ADVANCED & PRACTICAL NOTES
+
+These notes explain WHAT, WHY, and WHEN to use each Git command,
+with real-world and interview-level understanding.
+
+CONFIGURING GIT (ONE-TIME SETUP)
+
+Git needs your identity to attach author information to commits.
+
+Commands:
 git config --global user.name "My Name"
-git config --global user.email "someone@email.com"
+git config --global user.email "someone@email.com
+"
 git config --list
 
-Clone & Status
-	Clone - Cloning a repository on our local machine
-		Git Command -> git clone <link>
-	Status - display the state of the code
-		Git Command -> git status
-		1) Untracked -> new Files that git doesn't yet track
-		2) Modified -> changed
-		3) Staged -> File is ready to be committed
-		4) Unmodified -> unchanged
-	
+Important:
 
-cd command -> change directory
+--global applies to all repositories
 
-ls command -> It is used for listing all the files in the Folder/Repository
-ls -a command -> It is same as ls but also display hidden files and Folder/Repository
+Without this, Git will not allow commits
 
-Add & Commit
-add -> add new or changed files in your working directory to Git staging area.
-	command -> 1) git add <file name> 2) git add . (For all files) 
-	commit -> it is the record of change
-	command -> git commit -m "Some Message"
+REPOSITORY LIFECYCLE OVERVIEW
 
-Push Command
-push -> Upload local Repository/Folder content to remote(GitHub) repo
-	command -> git push origin main
+Working Directory -> Staging Area -> Local Repository -> Remote Repository
 
-Init Command
-	init -> Used to create new git repo
-	Commands -> git init
-		    git remote add origin <Link>
-		    git remote -v (To Verify remote)
-		    git branch (To check branch)
-		    git branch -M main (To rename branch)
-		    git puch origin main
-                    git puch -u origin main (If your pushing in same branch frequently so user can directly use -> git push)
+Working Directory : Where you edit files
+Staging Area : Files ready to be committed
+Local Repository : Commits stored locally
+Remote Repository : GitHub / GitLab
 
-Branch Commands
-	-> git branch (to check branch)
-	-> git branch -M main (to rename the branch)
-	-> git checkout <- branch name -> (to navigate)
-	-> git checkout -b <- new branch name -> (to create new branch)
-	-> git branch -d <- branch name -> (to delete branch)
+CLONE & STATUS
 
-Merging Code
-	Way-1
-		-> git diff <- branch name -> (to compare commit, branches, files & more)
-		-> git merge <- branch name -> (to merge 2 branches)
-	Way-2
-		Create PR
+CLONE (Remote -> Local)
+Creates a local copy of a remote repository.
 
-Pull Request
--> It lets you tell others abuth changes you've pushed to a branch in a repository on GitHub.
+Command:
+git clone <repository-link>
 
-Pull Command
--> git pull origin main
-used to fetch and donwload  content from a remote repo and immediately update and local repo to match that content.
+After cloning:
 
-Resolving Merge Conflicts
--> An event that takes place when Git it unable to automatically resolve diffrences in code between two commits. 
+.git folder is created (Git database)
+
+origin remote is automatically set
+
+STATUS (Most Used Command)
+Shows the current state of the repository.
+
+Command:
+git status
+
+File States:
+
+Untracked : New files Git is not tracking
+
+Modified : Tracked files with changes
+
+Staged : Changes ready to commit
+
+Unmodified: No changes
+
+NAVIGATION & FILE LISTING
+
+Change Directory:
+cd <folder-name>
+
+List Files:
+ls -> visible files
+ls -a -> visible + hidden files (.git, .env)
+
+ADD & COMMIT (CORE CONCEPT)
+
+ADD (Working Directory -> Staging Area)
+
+git add <file-name>
+git add .
+
+Why staging exists:
+
+Allows partial commits
+
+Gives control over commits
+
+COMMIT (Snapshot, NOT file upload)
+
+git commit -m "Meaningful commit message"
+
+Good commit message:
+
+Short and clear
+
+Present tense
+Example: Add login validation
+
+PUSH (LOCAL -> REMOTE)
+
+Uploads commits to GitHub.
+
+git push origin main
+
+origin -> remote name
+main -> branch name
+
+INIT (CREATE REPOSITORY FROM SCRATCH)
+
+Used when project already exists locally.
+
+git init
+git remote add origin <repository-link>
+git remote -v
+git branch
+git branch -M main
+git push -u origin main
+
+Why -u matters:
+After this, you can use:
+git push
+git pull
+
+BRANCHING (PROFESSIONAL WORKFLOW)
+
+Why branches exist:
+
+Isolate features
+
+Protect production code
+
+Team collaboration
+
+Commands:
+git branch -> list branches
+git checkout <branch-name> -> switch branch
+git checkout -b <new-branch> -> create & switch
+git branch -d <branch-name> -> delete branch
+
+Rule:
+Never work directly on main in real projects.
+
+MERGING CODE
+
+Way 1: Command Line Merge
+
+git diff <branch-name> -> preview changes
+git merge <branch-name> -> merge branches
+
+Way 2: Pull Request (Industry Standard)
+
+Push feature branch
+
+Create PR on GitHub
+
+Review code
+
+Merge into main
+
+PULL REQUEST (PR)
+
+A Pull Request is a request to merge code into another branch.
+
+Benefits:
+
+Code review
+
+Team discussion
+
+CI/CD checks
+
+PULL (REMOTE -> LOCAL)
+
+git pull origin main
+
+Internally:
+git fetch + git merge
+
+MERGE CONFLICTS (VERY IMPORTANT)
+
+Occurs when:
+
+Same file
+
+Same lines
+
+Different changes
+
+Steps to resolve:
+
+Open conflicted file
+
+Fix code manually
+
+Remove conflict markers
+
+git add + git commit
+
+UNDOING CHANGES (SAFELY)
+
+Undo staged changes:
+git reset <file-name>
+git reset
+
+Undo last commit (keep code):
+git reset HEAD~1
+
+Undo commits completely (dangerous):
+git reset --hard <commit-hash>
+
+Warning:
+Never use --hard on shared branches.
+
+FORK (OPEN SOURCE WORKFLOW)
+
+A fork is your personal copy of another repository.
+
+Workflow:
+
+Fork repository
+
+Clone fork
+
+Create branch
+
+Push changes
+
+Create PR to original repo
+
+MENTAL MODEL (MUST REMEMBER)
+
+Git tracks files, not folders
+
+Commits are snapshots, not differences
+
+Branch is just a pointer to a commit
+
+==================================================
+GIT INTERVIEW QUESTIONS & ANSWERS
+
+Q1. What is Git?
+A distributed version control system for tracking source code changes.
+
+Q2. Git vs GitHub?
+Git : Version control tool
+GitHub : Hosting platform
+
+Q3. What is a commit?
+A snapshot of the project at a point in time.
+
+Q4. What is staging area?
+Area where changes are prepared before commit.
+
+Q5. What is a branch?
+A pointer to a commit allowing parallel development.
+
+Q6. git pull vs git fetch?
+fetch : downloads changes
+pull : fetch + merge
+
+Q7. What is a merge conflict?
+When Git cannot auto-merge changes.
+
+Q8. What is a Pull Request?
+Request to merge code after review.
+
+Q9. What does git reset do?
+Moves HEAD to a previous commit.
+
+Q10. What is a fork?
+A personal copy of another repository.
+
+==================================================
+REAL TEAM WORKFLOW (FEATURE -> PR -> MERGE)
+
+Update main
+git checkout main
+git pull origin main
+
+Create feature branch
+git checkout -b feature/login-validation
+
+Work & commit
+git add .
+git commit -m "Add login validation"
+
+Push branch
+git push origin feature/login-validation
+
+Create PR on GitHub
+Base : main
+Compare : feature/login-validation
+
+Code review & fixes
+
+Merge PR and delete branch
+
+==================================================
+GITHUB + VS CODE WORKFLOW
+
+Clone repo:
+git clone <repo-link>
+
+VS Code:
+
+Source Control tab
+
+Stage changes (+)
+
+Add commit message
+
+Commit
+
+Push / Pull:
+
+Sync Changes
+
+Pull button
+
+Merge conflicts:
+
+Accept Current
+
+Accept Incoming
+
+Accept Both
+
+==================================================
+1-PAGE ADVANCED GIT CHEAT SHEET
+
+Daily:
+git status
+git add .
+git commit -m "message"
+git push
+git pull
+
+Branching:
+git checkout -b feature-name
+git branch -d feature-name
+
+Undo:
+git reset <file>
+git reset HEAD~1
+git reset --hard <hash>
+
+Inspect:
+git log
+git diff
+git branch
+git remote -v
+
+Safety Rules:
+
+Never force push to main
+
+Avoid --hard on shared branches
+
+Always pull before pushing
+
+==================================================
